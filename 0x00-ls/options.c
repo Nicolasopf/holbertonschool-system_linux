@@ -51,6 +51,15 @@ int simple_ls(int argc, char *argv[])
 	return (r_value);
 }
 
+/**
+ * get_files - separate the arguments in errors, files and dirs.
+ * @argc: Argument counter.
+ * @argv: Arguments vector.
+ * @files: Where to save the files.
+ * @not_files: Where to save the dirs.
+ * Return: 0 if not errors, otherwise 2.
+*/
+
 int get_files(int argc, char *argv[], char **files, char **not_files)
 {
 	DIR *dir;
