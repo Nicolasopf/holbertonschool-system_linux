@@ -26,7 +26,6 @@ int main(int argc, char *argv[])
  * @argc: argument counter.
  * @argv: argument vector.
  * @options: pointer where to save the options to use.
- * @files_names: pointer where to save the name of files passed as arguments.
  * Return: 0.
  */
 
