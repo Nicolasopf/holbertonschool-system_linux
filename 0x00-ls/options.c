@@ -30,8 +30,10 @@ int simple_ls(int argc, char *argv[])
 	{
 		dir = opendir(not_files[counter]);
 
-		if (not_files[1] || files[0])
+		if ((not_files[1] || files[0]) && counter != 0)
 			printf("\n%s:\n", not_files[counter]);
+		else
+			printf("%s:\n", not_files[counter]);
 
 		while ((read = readdir(dir)) != NULL)
 		{
