@@ -79,7 +79,7 @@ int simple_ls(int argc, char *argv[])
 
 		while ((read = readdir(dir)) != NULL)
 		{
-			if ((strcmp(read->d_name, ".") == 0) || (strcmp(read->d_name, "..") == 0))
+			if (*read->d_name == '.')
 				continue;
 			printf("%s  ", read->d_name);
 		}
