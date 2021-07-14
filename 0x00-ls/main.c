@@ -104,7 +104,7 @@ int display_error(char *name, char *dir_name)
 {
 	char str[1024];
 
-	sprintf(str, "%s: No such file or directory %s", name, dir_name);
+	sprintf(str, "%s: cannot access %s", name, dir_name);
 	perror(str);
 	return (2);
 }
