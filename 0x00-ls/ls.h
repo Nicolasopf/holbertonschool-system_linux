@@ -12,6 +12,6 @@ int ls_a(int argc, char *argv[]);
 int strchar(char *str, char a);
 int check_arguments(int argc, char *argv[], char *options);
 int simple_ls(int argc, char *argv[]);
-
+int get_files(int argc, char *argv[], char *files[], char *not_files[]);
 
 #endif /* LS_H */
