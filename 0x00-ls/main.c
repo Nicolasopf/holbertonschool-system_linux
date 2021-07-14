@@ -93,7 +93,7 @@ int simple_ls(int argc, char *argv[])
 		printf("\n");
 		closedir(dir);
 	}
-	return (return_value);
+	return (r_value);
 }
 
 /**
