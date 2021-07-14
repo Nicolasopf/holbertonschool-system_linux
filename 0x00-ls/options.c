@@ -12,12 +12,10 @@ int simple_ls(int argc, char *argv[])
 	DIR *dir;
 	struct dirent *read;
 	int counter = 0, r_value = 0, any = 0;
-	char *files[1024];
-	char *not_files[1024];
+	char *files[1024], *not_files[1024];
 
 	if (argc == 1)
 		argv[1] = ".", argc++;
-
 	r_value = get_files(argc, argv, files, not_files);
 
 	for (; files[counter]; counter++)
@@ -39,7 +37,9 @@ int simple_ls(int argc, char *argv[])
 		{
 			if (*read->d_name == '.')
 				continue;
-			printf("%s  ", read->d_name);
+			if (any)
+				printf("  ");
+			printf("%s", read->d_name);
 			any = 1;
 		}
 		if (any == 1)
