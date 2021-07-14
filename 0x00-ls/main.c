@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 	check_arguments(argc, argv, options);
 
 	if (argc == 1 || !options[0])
-		simple_ls(argc, argv);
+		return (simple_ls(argc, argv));
 
 	return (0);
 }
@@ -63,7 +63,7 @@ int simple_ls(int argc, char *argv[])
 {
 	DIR *dir;
 	struct dirent *read;
-	int counter = 1;
+	int counter = 1, r_value = 0;
 
 	if (argc == 1)
 		argv[1] = ".", argc++;
@@ -73,7 +73,10 @@ int simple_ls(int argc, char *argv[])
 		dir = opendir(argv[counter]);
 
 		if (!dir)
-			return (display_error(argv[0], argv[counter]));
+		{
+			r_value = display_error(argv[0], argv[counter]);
+			continue;
+		}
 		if (argc > 2)
 			printf("%s:\n", argv[counter]);
 
@@ -90,7 +93,7 @@ int simple_ls(int argc, char *argv[])
 		printf("\n");
 		closedir(dir);
 	}
-	return (0);
+	return (return_value);
 }
 
 /**
