@@ -30,11 +30,6 @@ int simple_ls(int argc, char *argv[])
 	{
 		dir = opendir(not_files[counter]);
 
-		if (!dir)
-		{
-			r_value = display_error(argv[0], argv[counter]);
-			continue;
-		}
 		if (not_files[1] || files[0])
 			printf("\n%s:\n", not_files[counter]);
 
@@ -77,10 +72,7 @@ int get_files(int argc, char *argv[], char **files, char **not_files)
 				file_counter++;
 			}
 			else
-			{
-				not_files[not_file_counter] = argv[counter];
-				not_file_counter++;
-			}
+				r_value = display_error(argv[0], argv[counter]);
 			continue;
 		}
 
