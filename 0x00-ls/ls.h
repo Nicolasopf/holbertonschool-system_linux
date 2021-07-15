@@ -14,5 +14,6 @@ int check_arguments(int argc, char *argv[], char *options);
 int simple_ls(int argc, char *argv[], char *options);
 int get_files(int argc, char *argv[], char *files[], char *not_files[]);
 void print_in(DIR *dir, char *options);
+void print_simple_files(char **files, char *options);
 
 #endif /* LS_H */
