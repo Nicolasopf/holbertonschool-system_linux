@@ -10,13 +10,10 @@
 int main(int argc, char *argv[])
 {
 	char options[1024];
-/*	char *files_names[1024] = {'\0'}; Arguments that are not options. */
 
 	options[0] = '\0';
 	check_arguments(argc, argv, options);
-
-	if (argc == 1 || !options[0])
-		return (simple_ls(argc, argv));
+	return (simple_ls(argc, argv, options));
 
 	return (0);
 }
@@ -31,10 +28,10 @@ int main(int argc, char *argv[])
 
 int check_arguments(int argc, char *argv[], char *options)
 {
-	int counter = 1, char_counter = 0, delim = 1;
+	int counter = 1, char_counter = 0, delim = 1, argv_counter = 0;
 
 	for (; counter < argc; counter++)
-		if (*argv[counter] == '-')
+		if (argv[counter][argv_counter] == '-')
 		{
 			for (; argv[counter][delim] && argv[counter][delim] != ' '; delim++)
 			{
@@ -43,7 +40,7 @@ int check_arguments(int argc, char *argv[], char *options)
 					options[char_counter] = argv[counter][delim];
 					char_counter++;
 				}
-				(*argv[counter])++;
+				argv_counter++;
 			}
 			delim = 1;
 		}
