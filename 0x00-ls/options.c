@@ -22,9 +22,11 @@ int simple_ls(int argc, char *argv[], char *options)
 	{
 		dir = opendir(not_files[counter]);
 
-		if ((not_files[1] || files[0]) || counter != 0)
+		if (counter != 0 || files[0])
+		{
 			printf("\n%s:\n", not_files[counter]);
-		else if (argc != 2)
+		}
+		else if ((not_files[1] || files[0]) && counter == 0)
 			printf("%s:\n", not_files[counter]);
 
 		print_in(dir, options);
