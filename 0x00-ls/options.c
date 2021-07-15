@@ -49,8 +49,7 @@ int get_files(int argc, char *argv[], char **files, char **not_files)
 {
 	DIR *dir;
 	int counter = 1, file_counter = 0, not_file_counter = 0;
-	int r_value = 0;
-	int passed_options = 0;
+	int r_value = 0, passed_options = 0;
 
 	for (; counter < argc; counter++)
 	{
@@ -65,24 +64,20 @@ int get_files(int argc, char *argv[], char **files, char **not_files)
 		{
 			if (errno == ENOTDIR)
 			{
-				files[file_counter] = argv[counter];
-				file_counter++;
+				files[file_counter] = argv[counter], file_counter++;
 				continue;
 			}
 			else
 				r_value = display_error(argv[0], argv[counter]);
 		}
-
-		not_files[not_file_counter] = argv[counter];
-		not_file_counter++;
+		not_files[not_file_counter] = argv[counter], not_file_counter++;
 		closedir(dir);
 	}
 
 	if (passed_options == argc - 1)
 	{
 		argv[1] = ".", argc++;
-		not_files[not_file_counter] = ".";
-		not_file_counter++;
+		not_files[not_file_counter] = ".", not_file_counter++;
 	}
 	files[file_counter] = '\0';
 	not_files[not_file_counter] = '\0';
@@ -97,7 +92,7 @@ int get_files(int argc, char *argv[], char **files, char **not_files)
 
 void print_in(DIR *dir, char *options)
 {
-	int any = 0;
+	int any = 0, a_aa = 0; /* 0 = all, 1=a, 2=A */
 	char separator[2] = {'\0'};
 	struct dirent *read;
 
@@ -113,10 +108,23 @@ void print_in(DIR *dir, char *options)
 		separator[2] = '\0';
 	}
 
+	if (strchar(options, 'A') == 0)
+		a_aa = 2;
+	else if (strchar(options, 'a') == 0)
+		a_aa = 1;
+
 	while ((read = readdir(dir)) != NULL)
 	{
 		if (*read->d_name == '.')
-			continue;
+		{
+			if (a_aa == 0)
+				continue;
+			else if (a_aa == 2 && (strcmp(read->d_name, ".") == 0))
+				continue;
+			else if (a_aa == 2 && (strcmp(read->d_name, "..") == 0))
+				continue;
+		}
+
 		if (any)
 			printf("%s", separator);
 		printf("%s", read->d_name);
