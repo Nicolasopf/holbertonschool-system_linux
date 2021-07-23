@@ -9,13 +9,12 @@
 #define READ_SIZE 409600
 
 /**
- * file_n - file linked list.
+ * struct file_n - file linked list.
  * @fd: file descriptor.
  * @next_line: pointer to the next line.
  * @buff: buffer of all lines.
  * @next: pointer to next node.
  */
-
 typedef struct file_n
 {
 	int fd;
