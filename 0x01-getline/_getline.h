@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <string.h>
 
-#define READ_SIZE 409600
+#define READ_SIZE 40960
 
 /**
  * struct file_n - file linked list.
