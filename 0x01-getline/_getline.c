@@ -34,7 +34,6 @@ char *_getline(const int fd)
 	{
 		if (file_->next)
 			head = file_->next;
-		free(file_);
 		return (NULL);
 	}
 
@@ -94,7 +93,7 @@ file_t *new_node(file_t **head, const int fd)
 
 void free_all(file_t *head)
 {
-	file_t *tmp;
+	file_t *tmp = NULL;
 
 	while (head)
 	{
