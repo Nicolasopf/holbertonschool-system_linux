@@ -23,6 +23,8 @@ char *_getline(const int fd)
 
 	if (!file_)
 		file_ = new_node(&head, fd);
+	if (!file_)
+		return (NULL);
 
 	for (; file_->next_line[counter]; counter++)
 		if (file_->next_line[counter] == '\n')
