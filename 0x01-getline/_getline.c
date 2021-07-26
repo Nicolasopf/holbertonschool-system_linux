@@ -10,8 +10,8 @@ char *_getline(const int fd)
 {
 	int counter = 0;
 	static file_t *head;
-	file_t *file_;
-	char *last_buffer;
+	file_t *file_ = NULL;
+	char *last_buffer = NULL;
 
 	if (fd == -1)
 	{
@@ -25,7 +25,7 @@ char *_getline(const int fd)
 		file_ = new_node(&head, fd);
 
 	for (; file_->next_line[counter]; counter++)
-		if (file_->next_line[counter] != '\n')
+		if (file_->next_line[counter] == '\n')
 			break;
 
 	if (!file_->next_line[0])
@@ -36,7 +36,12 @@ char *_getline(const int fd)
 		return (NULL);
 	}
 
-	last_buffer = strndup(file_->next_line, counter);
+	last_buffer = malloc((counter + 1) * sizeof(last_buffer));
+	if (!last_buffer)
+		return (NULL);
+
+	strncpy(last_buffer, file_->next_line, counter);
+	last_buffer[counter] = '\0';
 	file_->next_line += counter + 1;
 	return (last_buffer);
 }
